@@ -2,9 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header>
       <q-toolbar
-        color="primary"
-        :glossy="$q.theme === 'mat'"
-        :inverted="$q.theme === 'ios'"
+        color="negative"
       >
         <q-btn
           flat
@@ -17,12 +15,14 @@
         </q-btn>
 
         <q-toolbar-title>
-          Quasar App
+          Yggdrasil
           <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
         </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
-
+    <!-- <q-page-container>
+      <router-view/>
+    </q-page-container> -->
     <q-layout-drawer
       v-model="leftDrawerOpen"
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
@@ -32,7 +32,22 @@
         link
         inset-delimiter
       >
-        <q-list-header>Essential Links</q-list-header>
+      <q-collapsible icon="near_me" label="Navigation">
+        <q-item link to="/">
+          <q-item-side icon="home" />
+          <q-item-main label="Home"/>
+        </q-item>
+        <q-item link to="todo">
+          <q-item-side icon="done_all" />
+          <q-item-main label="Todos"/>
+        </q-item>
+        <q-item link to="about">
+          <q-item-side icon="info" />
+          <q-item-main label="About"/>
+        </q-item>
+      </q-collapsible>
+      <q-collapsible icon="info" label="Essential Links">
+        <!-- <q-list-header>Essential Links</q-list-header> -->
         <q-item @click.native="openURL('http://quasar-framework.org')">
           <q-item-side icon="school" />
           <q-item-main label="Docs" sublabel="quasar-framework.org" />
@@ -53,6 +68,7 @@
           <q-item-side icon="rss feed" />
           <q-item-main label="Twitter" sublabel="@quasarframework" />
         </q-item>
+      </q-collapsible>
       </q-list>
     </q-layout-drawer>
 
