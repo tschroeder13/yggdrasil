@@ -8,11 +8,22 @@
 </template>
 
 <script>
+import store from '../store/TodoStore'
+import PouchDB from 'pouchdb'
 export default {
   // name: 'LayoutName',
   data () {
     return {
     }
+  },
+  created () {
+    store.dispatch('syncAll')
+
+    let db = PouchDB('todos')
+    db.changes({ since: 'now', live: true })
+      .on('change', () => {
+        store.dispatch('syncAll')
+      })
   }
 }
 </script>

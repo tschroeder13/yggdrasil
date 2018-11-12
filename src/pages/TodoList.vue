@@ -36,6 +36,7 @@ export default {
   },
   computed: {
     todos () {
+      console.log(JSON.stringify(store.state.todos))
       return store.state.todos
     }
   }
