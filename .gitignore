@@ -3,6 +3,10 @@
 .thumbs.db
 node_modules
 /dist
+/todos/
+/_users/
+/_replicator/
+/pouch__all_dbs__/
 /src-cordova/node_modules
 /src-cordova/platforms
 /src-cordova/plugins
@@ -10,7 +14,7 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+log.txt
 # Editor directories and files
 .idea
 .vscode

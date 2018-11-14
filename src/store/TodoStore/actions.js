@@ -44,6 +44,7 @@ export function removeDones (ctx) {
 }
 
 export function syncAll (ctx) {
+  console.log('syncAll is called')
   store.db.allDocs({ include_docs: true })
     .then(res => {
       ctx.commit('setTodos', res.rows.map(row => row.doc))

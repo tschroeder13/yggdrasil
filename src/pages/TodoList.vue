@@ -27,8 +27,9 @@
 </template>
 
 <script>
-// import store from '../store/TodoStore'
-import PouchDB from 'pouchdb'
+import store from '../store/TodoStore'
+// import PouchDB from 'pouchdb'
+
 export default {
   // name: 'PageName',
   data () {
@@ -36,17 +37,16 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('TodoStore/syncAll')
-    let db = PouchDB('todos')
-    db.changes({ since: 'now', live: true })
+    store.dispatch('TodoStore/syncAll')
+    store.db.changes({ since: 'now', live: true })
       .on('change', () => {
-        this.$store.dispatch('TodoStore/syncAll')
+        store.dispatch('TodoStore/syncAll')
       })
   },
   computed: {
     todos () {
-      console.log(JSON.stringify(this.$store.state.todos))
-      return this.$store.state.todos
+      console.log(JSON.stringify(store.state.todos))
+      return store.state.todos
     }
   }
 }

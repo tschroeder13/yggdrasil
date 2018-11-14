@@ -21,5 +21,6 @@ export function cleanNewTodo (state) {
 }
 
 export function setTodos (state, todos) {
+  console.log('setting state.todos')
   state.todos = todos
 }
