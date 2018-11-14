@@ -1,5 +1,7 @@
 
-export default {
-  todos: [],
-  new_todo: null
+export default function () {
+  return {
+    todos: [],
+    new_todo: null
+  }
 }

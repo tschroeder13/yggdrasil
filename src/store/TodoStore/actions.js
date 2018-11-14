@@ -1,14 +1,12 @@
-import PouchDB from 'pouchdb'
-const db = new PouchDB('todos')
-PouchDB.sync('todos', 'http://127.0.0.1:5984/todos/', { live: true })
-
+import { uid } from 'quasar'
+import store from '.'
 export function addTodo (ctx) {
   let todo = {
-    _id: new Date().toISOString(),
+    _id: uid(), // new Date().toISOString(),
     text: ctx.state.newTodo,
     done: false
   }
-  db.put(todo)
+  this.$store.state.db.put(todo)
     .then(res => {
       todo._rev = res.rev
       ctx.commit('addTodo', todo)
@@ -20,7 +18,7 @@ export function addTodo (ctx) {
 }
 
 export function editTodo (ctx, todo) {
-  db.put(todo)
+  this.$store.state.db.put(todo)
     .then(res => {
       todo._rev = res.rev
       ctx.commit('editTodo', todo)
@@ -31,7 +29,7 @@ export function editTodo (ctx, todo) {
 }
 
 export function removeTodo (ctx, todo) {
-  db.remove(todo)
+  this.$store.state.remove(todo)
     .then(res => {
       ctx.commit('removeTodo', todo)
     })
@@ -46,7 +44,7 @@ export function removeDones (ctx) {
 }
 
 export function syncAll (ctx) {
-  db.allDocs({ include_docs: true })
+  store.db.allDocs({ include_docs: true })
     .then(res => {
       ctx.commit('setTodos', res.rows.map(row => row.doc))
     })
